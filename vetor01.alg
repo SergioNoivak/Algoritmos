@@ -1,7 +1,7 @@
 Algoritmo "semnome"
 
-//Faça um algoritmo que leia 100 valores e verifique se existem valores iguais a 30.
-//Se existirem, escrever as posições em que eles estão armazenados.
+//FaÃ§a um algoritmo que leia 100 valores e verifique se existem valores iguais a 30.
+//Se existirem, escrever as posiÃ§Ãµes em que eles estÃ£o armazenados.
 
 Var
 numeros: vetor[1..3] de inteiro
