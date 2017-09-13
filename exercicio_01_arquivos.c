@@ -11,6 +11,7 @@ fornecer:
 • sua resposta (s)im, (n)ão ou (i)ndeciso,
 • e o preço pago pelo produto.
 
+
 Desenvolva um programa em linguagem C para armazenar os dados dos entrevistados em
 um arquivo de texto.
 Neste programa, variáveis, vetores, matrizes e ponteiros NÃO poderão ser globais.
@@ -28,11 +29,11 @@ Quanto ao usuário, ele poderá escolher quais funcionalidades utilizar,
 selecionando uma por vez e podendo repeti-las.
 O usuário poderá determinar ainda se a funcionalidade escolhida se aplicará a
 ambos os sexos ou a um determinado por ele.
-
 **/
 
 #include<stdio.h>
 #include<stdlib.h>
+#include<limits.h>
 
 
 
@@ -117,6 +118,11 @@ int gerar_menu() {
     return 0;
 }
 
+double media(double soma,double total){
+
+    return soma/(double)total;
+}
+
 int main() {
 
     int i;
@@ -139,16 +145,40 @@ int main() {
             gravar_com_arquivo_ja_aberto(arquivo,vetor[i]);
         }
         fclose(arquivo);
-    }
-    else if(resultado==2){
-          i=0;
-          FILE* arquivo = fopen("teste.txt","r");
-          char string[99999];
-      ile(!feof(arquivo)){
-            fgets(string,99999,arquivo);
-            
-            puts(string);
-          }
-          fclose(arquivo);
+    } else if(resultado==2) {
+        int contador_de_linha=0;
+        FILE* arquivo = fopen("teste.txt","r");
+        char string[1000];
+        int soma=0;
+        double ac_valores=0.0;
+        int total=0;
+        while(!feof(arquivo)) {
+    fgets(string,1000,arquivo);
+    switch(contador_de_linha){
+        case 2:
+            soma+=atoi(string);
+            total++;
+            break;
+
+        case 4:
+            ac_valores+=atof(string);
+            break;
+
+        case 5:
+            contador_de_linha=0;
+            break;
+
+        }
+    printf("%s",string);
+    contador_de_linha++;
+        }
+
+        if(contador_de_linha>0)
+        {
+            printf("\n A media(Im) das idades eh: %d anos ", (int)media((double)soma,(double)total));
+            printf("\n A media(Pm) dos precos eh: $ %.2f  ",media((double)ac_valores,(double)total) );
+
+        }
+        fclose(arquivo);
     }
 }
